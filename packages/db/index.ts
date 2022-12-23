@@ -1,6 +1,6 @@
-import { open } from "lmdb";
+import { open } from 'lmdb';
 
 export const db = open({
-  path: "./records",
+  path: './records',
   compression: true,
 });

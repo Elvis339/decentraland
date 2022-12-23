@@ -13,6 +13,14 @@ const left = v => ({
   matchWith: pattern => pattern.left(v),
 });
 
+export const tryCatch = fn => {
+  try {
+    return right(fn());
+  } catch (err) {
+    return left(err);
+  }
+};
+
 export const stringify = R.curry(message => JSON.stringify(message));
 
 export const getRandomArbitrary = (min, max) => Math.floor(Math.random() * (max - min) + min);
