@@ -1,0 +1,10 @@
+{
+  "name": "@decentraland/shamir",
+  "version": "1.0.0",
+  "description": "fork of https://github.com/unusualbob/shamirJS",
+  "main": "shamir.mjs",
+  "author": "Rob Riddle",
+  "license": "MIT",
+  "private": true,
+  "type": "module"
+}

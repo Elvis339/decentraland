@@ -1,0 +1,19 @@
+{
+  "name": "@decentraland/node",
+  "version": "1.0.0",
+  "main": "index.mjs",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@chainsafe/libp2p-gossipsub": "^5.3.0",
+    "@chainsafe/libp2p-noise": "^10.2.0",
+    "@decentraland/logger": "^1.0.0",
+    "@libp2p/mplex": "^7.1.1",
+    "@libp2p/tcp": "^6.0.8",
+    "@nodeutils/defaults-deep": "^1.1.0",
+    "eth-crypto": "^2.5.0",
+    "libp2p": "^0.41.0",
+    "uint8arrays": "^4.0.2"
+  }
+}
