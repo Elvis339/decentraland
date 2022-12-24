@@ -47,5 +47,11 @@ const write = R.curry((path, data) => fs.writeFileSync(path, data));
 const createDecryptionIdentity = write('decryption_wallet.json');
 const identity = () => EthCrypto.createIdentity();
 
-export const create = R.pipe(identity, stringify, createDecryptionIdentity);
+export const create = R.pipe(
+  identity,
+  stringify,
+  createDecryptionIdentity,
+  () => read('decryption_wallet.json'),
+  JSON.parse,
+);
 export const decryptionWallet = R.ifElse(fs.existsSync, path => JSON.parse(read(path)), create);

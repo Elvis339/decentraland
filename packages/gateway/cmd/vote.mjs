@@ -20,7 +20,7 @@ const packMessage = encryptedData => {
 
 let maxDepth = 200;
 let currentDepth = 0;
-export const vote = async node => {
+export const vote = async (node, decryptionWalletPublicKey) => {
   const questionObject = getQuestion();
   if (currentDepth === maxDepth) {
     throw new Error(`Max depth reached!`);
@@ -39,7 +39,7 @@ export const vote = async node => {
     if (addr) {
       currentDepth += 1;
       logger.info(`Skipping ${question} \n`);
-      return await vote(node);
+      return await vote(node, decryptionWalletPublicKey);
     }
   }
 
@@ -55,7 +55,7 @@ export const vote = async node => {
 
     const encryptedPayload = packMessage(
       await EthCrypto.encryptWithPublicKey(
-        '690ece2bfbdee1272fcc766a8dc4348aadfa371343888b11b544191b4f0efcbcdf78bd626bd9891f2e37679d4098d79e369c207aa8038d63e2065621361b0003', // decryptor public key
+        decryptionWalletPublicKey,
         stringify({
           [question]: answer,
           address: getAddress(),
@@ -84,7 +84,7 @@ export const vote = async node => {
         }),
       ),
     );
-    return await vote(node);
+    return await vote(node, decryptionWalletPublicKey);
   } catch (error) {
     logger.error(error);
     process.exit(1);

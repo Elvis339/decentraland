@@ -6,7 +6,7 @@ import { gatewayNode } from './cmd/gateway.mjs';
 import { logger } from '@decentraland/logger';
 import { generateShares } from './cmd/generate-shares.mjs';
 import { deriveSecret } from './cmd/deriveSecret.mjs';
-import { decryptionWallet, read } from './utils/utils.js';
+import { decryptionWallet } from './utils/utils.js';
 
 program.name('Welcome to Decentralized').description('Decentralized oracle').version('1.0.0');
 
@@ -22,9 +22,21 @@ program
   .command('vote')
   .description('Description start voting')
   .action(async () => {
-    decryptionWallet('decryption_wallet.json');
+    let decryptionWalletIdentity = decryptionWallet('decryption_wallet.json');
+    if (typeof decryptionWalletIdentity === 'string') {
+      decryptionWalletIdentity = JSON.parse(decryptionWalletIdentity)
+    }
+
     const node = await gatewayNode();
-    await vote(node.pubsub);
+    await vote(node.pubsub, decryptionWalletIdentity.publicKey.toString());
+  });
+
+program
+  .command('decryption:identity')
+  .description('Generate decryption wallet identity')
+  .action(() => {
+    const decryptionWalletIdentity = decryptionWallet('decryption_wallet.json');
+    logger.info(`Decryption wallet=${decryptionWalletIdentity}`);
   });
 
 program.command('print').description('Print values from db').action(printCmd);
