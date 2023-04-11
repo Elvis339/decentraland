@@ -1,6 +1,6 @@
 # Explanation
 Hackaton project for decentralized q&a leveraging p2p network and Shamir secret sharing algorithm.
-Shamir's Secret Sharing can be seen as a form of threshold encryption, in the sense that it allows a secret to be encrypted and divided into a number of shares, such that a threshold number of shares is required to decrypt the secret,
+Shamir's Secret Sharing can be seen as a form of MPC, in the sense that it allows a secret to be encrypted and divided into a number of shares, such that a threshold number of shares is required to decrypt the secret,
 this means that we as a company do not hold all the power and can trust community to run these nodes.
 
 Workflow:
